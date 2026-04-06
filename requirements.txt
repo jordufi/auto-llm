@@ -1,0 +1,11 @@
+torch>=2.3
+numpy>=1.26
+pyyaml>=6.0
+tensorboard>=2.16
+tokenizers>=0.19
+datasets>=2.20
+safetensors>=0.4.3
+tqdm>=4.66
+datasets==4.8.4
+huggingface_hub==1.8
+pyarrow==23.0.1

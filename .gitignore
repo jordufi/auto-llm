@@ -1,0 +1,6 @@
+*bin
+/data
+/outputs
+__pycache__
+*.pyc
+*.pyo

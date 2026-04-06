@@ -1,0 +1,73 @@
+project_name: mini_llm_2026
+
+model:
+  vocab_size: 50000
+  max_seq_len: 512
+  d_model: 1024
+  n_layers: 24
+  n_heads: 16
+  n_kv_heads: 8
+  d_ff: 4096
+  dropout: 0.0
+  rotary_base: 10000
+  rotary_scaling_factor: 1.0
+  tie_embeddings: true
+  pad_token_id: 0
+  bos_token_id: 1
+  eos_token_id: 2
+
+training:
+  seed: 42
+  precision: bf16
+  gradient_checkpointing: true
+  use_compile: false
+  max_steps: 200 #20000
+  grad_accum_steps: 8
+  micro_batch_size: 1
+  max_grad_norm: 1.0
+  lr: 3.0e-4
+  min_lr: 3.0e-5
+  warmup_steps: 1000
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  save_every: 1000
+  eval_every_steps: 2000
+  log_every: 20
+  mtp_weight_1: 1.0
+  mtp_weight_2: 0.5
+  num_workers: 2
+  pin_memory: true
+
+data:
+  tokenizer_path: artifacts/tokenizer.json
+  train_cache: artifacts/train_tokens.bin
+  val_cache: artifacts/val_tokens.bin
+  raw_train_paths:
+    - data\base_openwebtext.jsonl
+    - data\base_tinystories.jsonl
+  raw_val_paths:
+    - data/val.jsonl
+  cache_dtype: uint32
+  overwrite_cache: false
+  chat_template:
+    system: "You are a helpful assistant."
+    user_prefix: "<|user|>"
+    assistant_prefix: "<|assistant|>"
+    system_prefix: "<|system|>"
+
+validation_prompts:
+  - "Explain quantum computing in simple words."
+  - "Write a short poem about the sea."
+  - "What is the difference between a CPU and a GPU?"
+  - "How do I train a language model on one GPU?"
+  - "Give me a good title for a YouTube video about AI."
+  - "Summarize why checkpoints are important."
+  - "Tell me a joke about programmers."
+  - "How does attention work in transformers?"
+  - "What should I learn before building a chatbot?"
+  - "Write a friendly greeting message for a chatbot."
+
+paths:
+  output_dir: outputs/mini_llm_2026
+  checkpoint_dir: outputs/mini_llm_2026/checkpoints
+  tb_dir: outputs/mini_llm_2026/tensorboard
