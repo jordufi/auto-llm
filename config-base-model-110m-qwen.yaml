@@ -1,7 +1,7 @@
 project_name: mini_llm_2026
 
 model:
-  vocab_size: 50000
+  vocab_size: 262144 
   max_seq_len: 512
   d_model: 768
   n_layers: 12
@@ -23,7 +23,7 @@ training:
   use_compile: false #TODO false
   max_steps: 50000 #100000
   grad_accum_steps: 1 
-  micro_batch_size: 18
+  micro_batch_size: 2
   max_grad_norm: 1.0
   lr: 6.0e-4
   min_lr: 6.0e-5
